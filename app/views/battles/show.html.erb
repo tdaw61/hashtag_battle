@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @battle.name %>
+</p>
+
+<p>
+  <strong>Tag one:</strong>
+  <%= @battle.tag_one %>
+</p>
+
+<p>
+  <strong>Tag two:</strong>
+  <%= @battle.tag_two %>
+</p>
+
+<p>
+  <strong>Time start:</strong>
+  <%= @battle.time_start %>
+</p>
+
+<p>
+  <strong>Time end:</strong>
+  <%= @battle.time_end %>
+</p>
+
+<%= link_to 'Edit', edit_battle_path(@battle) %> |
+<%= link_to 'Back', battles_path %>
