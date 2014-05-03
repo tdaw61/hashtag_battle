@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502031737) do
+ActiveRecord::Schema.define(version: 20140503215948) do
 
   create_table "battles", force: true do |t|
     t.string   "name"
     t.string   "tag_one"
     t.string   "tag_two"
-    t.datetime "time_start"
-    t.datetime "time_end"
+    t.date     "time_start"
+    t.date     "time_end"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
