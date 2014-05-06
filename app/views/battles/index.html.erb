@@ -1,41 +1,8 @@
 
 
 <html>
-<head>
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css"/>
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <style type="text/css">
-        input, textarea { color: #fff; }
-        .placeholder { color: #fff; }
-    </style>
-
-</head>
 <body class="bp" data-spy="scroll" data-target=".bs-docs-sidebar">
-<div class="head1">
-    <div class="container">
-        <div class="row">
-            <div class="nav">
-                <div class="buttons row pull-right">
-                    <span class="center">Tint Battle</span>
-                    <a class="basic-btn support" alt="Support" href="1040_Support.html">Support</a>
-                    <a class="basic-btn aboutus" alt="About Us" href="1050_AboutUs.html">About Us</a>
-                    <a href="#" alt="Log in" class="iconic-btn login"><i class="icon-signin"></i>
 
-                        <div class="divider"></div>
-                        <span>Log in</span></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="head2">
-    <div class="container">
-        <div class="row">
-             <p>Tint Battle</p>
-        </div>
-    </div>
-</div>
 <div class="navbar-fixed fixed" data-spy="affix" data-offset-top="80">
     <div class="head3">
         <div class="container">
@@ -134,16 +101,17 @@
                         <h5><%= link_to tag_names.join(" vs. "), battle %></h5>
 
                         <p> Date Started: <%= battle.time_start %> </p>
-                        <% if battle.time_end.nil?%>
+                        <% if !battle.time_end.nil?%>
                         <p> Finish Date:  <%= battle.time_end %> </p>
                         <% end %>
-                        <span style="margin: 0, auto">
-                            <p style="">
+                        <span>
+                            <p style="float: left; margin-left: 340px" >
                                 <%= link_to 'Edit this Battle', edit_battle_path(battle), :class => "btn btn-medium btn-warning" %>
                             </p>
-                            <p>
+                            <p style="float: right; margin-right: 310px; margin-top: 10px">
                                <%= link_to 'Destroy this Battle', battle, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-medium btn-warning" %>
                             </p>
+                            <p style="clear:both"></p>
                         </span>
                         <hr />
                     </section>
@@ -155,31 +123,6 @@
     </div><!-- end container div -->
 </div><!-- end root div -->
 
-
-<div id="footer">
-    <div class="foot2">
-        <div class="container">
-            <div class="row" style="margin-left: auto; margin-right: auto">
-                <div class="span2 foot-section">
-                    <ul class="foot-list">
-                        <li><a href="#">Item 1</a></li>
-                    </ul>
-                </div>
-                <div class="span2 foot-section">
-                    <ul class="foot-list">
-                        <li><a href="#">Item 1</a></li>
-                    </ul>
-                </div>
-                <div class="span2 foot-section">
-                    <ul class="foot-list">
-                        <li><a href="#">Item 1</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-1.7-development-only.js"></script>
 <script type="text/javascript">

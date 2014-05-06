@@ -1,4 +1,5 @@
 class BattlesController < ApplicationController
+  #we want to make sure the battle is loaded accordingly, and also that we are authenticated for twitter search.
   before_action :set_battle, only: [:show, :edit, :update, :destroy]
   before_action :tweet_config
 
@@ -11,11 +12,10 @@ class BattlesController < ApplicationController
   # GET /battles/1
   # GET /battles/1.json
   def show
-    #go through each hashtag for the battle, and search from the start date to the end date
+    #go through each hashtag for the battle, and search from the start date to the end date, then stash the count
     @battle.hashtags.each do |hashtag|
       count = 0
       last_tweet_id = 0
-      #@battle.time_end = @battle.time_end + 1.day
       search = hashtag.content + " -rt since:" + @battle.time_start.to_s + " until:" + (@battle.time_end + 1.day).to_s
       search_results = @client.search(search)
       search_results.each do |tweet|
@@ -51,6 +51,12 @@ class BattlesController < ApplicationController
   def create
     @battle = Battle.new(battle_params)
 
+    #:add_hashtag param is for adding a new hashtag to the form.
+    if params[:add_hashtag]
+      # add empty hashtag to the battle
+      @battle.hashtags.build
+      render :new and return
+    end
     respond_to do |format|
       if @battle.save
         format.html { redirect_to @battle, notice: 'Battle was successfully created.' }
@@ -65,6 +71,19 @@ class BattlesController < ApplicationController
   # PATCH/PUT /battles/1
   # PATCH/PUT /battles/1.json
   def update
+
+    if params[:add_hashtag]
+      # the other unsaved added fields need to be recreated
+      unless params[:battle][:hashtags_attributes].blank?
+        for attribute in params[:battle][:hashtags_attributes]
+          @battle.hashtags.build(attribute.last.except(:_destroy)) unless attribute.last.has_key?(:id)
+        end
+      end
+      # add empty hashtag to the battle
+      @battle.hashtags.build
+      render :edit and return
+    end
+
     respond_to do |format|
       if @battle.update(battle_params)
         format.html { redirect_to @battle, notice: 'Battle was successfully updated.' }

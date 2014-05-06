@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :battles
 
+  match '/about',   to: 'battles#about',   via: 'get'
+  match '/help', to: 'battles#help', via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

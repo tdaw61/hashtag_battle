@@ -1,25 +1,36 @@
+<div class="show master">
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<p style="font-size : 30px">
+  <strong>Battle:</strong>
   <%= @battle.name %>
 </p>
 
 
-<% @battle.hashtags.each do |hashtag| %>
-    <p><%=hashtag.content%></p>
-    <p>Current Score : <%=hashtag.count%></p>
-<% end %>
+<div class="hashtags">
 
-<p>
-  <strong>Time start:</strong>
-  <%= @battle.time_start %>
-</p>
+    <% @battle.hashtags.each do |hashtag| %>
+        <p class="title"><%=hashtag.content%></p>
+        <p class="scores">Current Score : <%=hashtag.count%></p>
+    <% end %>
+</div>
 
-<p>
-  <strong>Time end:</strong>
-  <%= @battle.time_end %>
-</p>
+<div class="dates" >
 
-<%= link_to 'Edit', edit_battle_path(@battle) %> |
-<%= link_to 'Back', battles_path %>
+    <p>
+        <strong>Start Date:</strong>
+        <%= @battle.time_start %>
+    </p>
+
+    <p>
+        <strong>End Date:</strong>
+        <%= @battle.time_end %>
+    </p>
+
+</div>
+<div style="clear:both"> <br><br>   <%= link_to 'Edit this Battle', edit_battle_path(@battle) %> |
+    <%= link_to 'Back to Battle List', battles_path %>
+</div>
+
+</div>
