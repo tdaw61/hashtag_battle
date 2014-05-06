@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="face4074-f99e-48e0-9be6-bcf8d3962e36" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Analytics" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/battles/about.html.erb" afterPath="$PROJECT_DIR$/app/views/battles/about.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/battles.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/battles.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/hashtag.rb" afterPath="$PROJECT_DIR$/app/models/hashtag.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="face4074-f99e-48e0-9be6-bcf8d3962e36" name="Default" comment="" />
     <ignored path="hashtag_battle.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="face4074-f99e-48e0-9be6-bcf8d3962e36" time="1399366720630" ignored="false" />
