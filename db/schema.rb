@@ -11,16 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140503215948) do
+ActiveRecord::Schema.define(version: 20140506035633) do
 
   create_table "battles", force: true do |t|
     t.string   "name"
-    t.string   "tag_one"
-    t.string   "tag_two"
     t.date     "time_start"
     t.date     "time_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "battles_hashtags", id: false, force: true do |t|
+    t.integer "battle_id"
+    t.integer "hashtag_id"
+  end
+
+  add_index "battles_hashtags", ["battle_id", "hashtag_id"], name: "index_battles_hashtags_on_battle_id_and_hashtag_id"
+
+  create_table "hashtags", force: true do |t|
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "count"
+    t.integer  "last_tweet_id"
   end
 
 end

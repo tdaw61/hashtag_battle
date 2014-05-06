@@ -11,24 +11,35 @@ class BattlesController < ApplicationController
   # GET /battles/1
   # GET /battles/1.json
   def show
-    first_search = @battle.tag_one + " -rt since:" + @battle.time_start.to_s + " until:" + @battle.time_end.to_s
-    second_search = @battle.tag_two + " -rt since:" + @battle.time_start.to_s + " until:" + @battle.time_end.to_s
-    @first_hashtag = @client.search(first_search)
-    @second_hashtag = @client.search("#testingonlyone -rt since:2014-05-01 until:2014-05-03")
-    @count_one = 0
-    @count_two = 0
-    @first_hashtag.each do |tweet|
-      tweet.text
-      @count_one = @count_one + 1
-    end
-    @second_hashtag.each do |tweet|
-      @count_two = @count_two + 1
+    #go through each hashtag for the battle, and search from the start date to the end date
+    @battle.hashtags.each do |hashtag|
+      count = 0
+      last_tweet_id = 0
+      #@battle.time_end = @battle.time_end + 1.day
+      search = hashtag.content + " -rt since:" + @battle.time_start.to_s + " until:" + (@battle.time_end + 1.day).to_s
+      search_results = @client.search(search)
+      search_results.each do |tweet|
+        count = count + 1
+        last_tweet_id = tweet.id
+      end
+      hashtag.count = count
+
+      #update the hashtag to have the actual count, since twitter search api only keeps valid data for a week.
+      #Also keep track of last tweet ID counted, so you can start count from there next time.
+      @db_hashtag = Hashtag.find(hashtag[:id])
+      unless count == @db_hashtag.count
+        @db_hashtag.count = count
+        @db_hashtag.last_tweet_id = last_tweet_id
+      end
     end
   end
 
   # GET /battles/new
   def new
+    #set up hashtags attributes. Start with 2 for standard battle.
     @battle = Battle.new
+    @battle.hashtags.build
+    @battle.hashtags.build
   end
 
   # GET /battles/1/edit
@@ -83,9 +94,11 @@ class BattlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def battle_params
-      params.require(:battle).permit(:name, :tag_one, :tag_two, :time_start, :time_end)
+      #params.require(:battle).permit(:name, :time_start, :time_end, :hashtags_attributes)
+      params.require(:battle).permit!
     end
 
+    #initialize and authorize the client to use twitter search API.
     def tweet_config
 
       @client = Twitter::REST::Client.new do |config|

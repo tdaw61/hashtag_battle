@@ -16,21 +16,20 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :tag_one %><br>
-    <%= f.text_field :tag_one %>
-  </div>
-  <div class="field">
-    <%= f.label :tag_two %><br>
-    <%= f.text_field :tag_two %>
-  </div>
-  <div class="field">
     <%= f.label :time_start %><br>
-    <%= f.datetime_select :time_start %>
+    <%= f.date_select :time_start %>
   </div>
   <div class="field">
     <%= f.label :time_end %><br>
-    <%= f.datetime_select :time_end %>
+    <%= f.date_select :time_end %>
   </div>
+
+    <div class="field">
+        <%= f.fields_for :hashtags do |hashtag_fields| %>
+                <%= hashtag_fields.label :content , "# name" %>
+                <%= hashtag_fields.text_field :content %><br>
+        <% end %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>

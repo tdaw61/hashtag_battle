@@ -5,25 +5,12 @@
   <%= @battle.name %>
 </p>
 
-<p>
-  <strong>Tag one:</strong>
-  <%= @battle.tag_one %>
-</p>
 
-<p>
-  <strong>Tag two:</strong>
-  <%= @battle.tag_two %>
-</p>
+<% @battle.hashtags.each do |hashtag| %>
+    <p><%=hashtag.content%></p>
+    <p>Current Score : <%=hashtag.count%></p>
+<% end %>
 
-<p>
-    <strong>TAG ONE COUNT</strong>
-    <%= @count_one %>
-</p>
-
-<p>
-    <strong>TAG TWO COUNT</strong>
-    <%= @count_two %>
-</p>
 <p>
   <strong>Time start:</strong>
   <%= @battle.time_start %>

@@ -1,35 +1,213 @@
-<h1>Battles:</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Battle Name</th>
-      <th>#1</th>
-      <th>#2</th>
-      <th>Time start</th>
-      <th>Time end</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @battles.each do |battle| %>
-      <tr>
-        <td><%= battle.name %></td>
-        <td><%= battle.tag_one %></td>
-        <td><%= battle.tag_two %></td>
-        <td><%= battle.time_start %></td>
-        <td><%= battle.time_end %></td>
-        <td><%= link_to 'Show', battle %></td>
-        <td><%= link_to 'Edit', edit_battle_path(battle) %></td>
-        <td><%= link_to 'Destroy', battle, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<html>
+<head>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css"/>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <style type="text/css">
+        input, textarea { color: #fff; }
+        .placeholder { color: #fff; }
+    </style>
 
-<br>
+</head>
+<body class="bp" data-spy="scroll" data-target=".bs-docs-sidebar">
+<div class="head1">
+    <div class="container">
+        <div class="row">
+            <div class="nav">
+                <div class="buttons row pull-right">
+                    <span class="center">Tint Battle</span>
+                    <a class="basic-btn support" alt="Support" href="1040_Support.html">Support</a>
+                    <a class="basic-btn aboutus" alt="About Us" href="1050_AboutUs.html">About Us</a>
+                    <a href="#" alt="Log in" class="iconic-btn login"><i class="icon-signin"></i>
 
-<%= link_to 'New Battle', new_battle_path %>
+                        <div class="divider"></div>
+                        <span>Log in</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="head2">
+    <div class="container">
+        <div class="row">
+             <p>Tint Battle</p>
+        </div>
+    </div>
+</div>
+<div class="navbar-fixed fixed" data-spy="affix" data-offset-top="80">
+    <div class="head3">
+        <div class="container">
+            <div class="row">
+                <div class="nav2 span12">
+                    <div class="row">
+                        <div class="logoholder span4">
+                            <a href="/">
+                                <span class="icons-logo "></span>
+                            </a>
+                        </div>
+                        <div class="span8">
+                            <ul class="nav2-menu row hidden-phone hidden-tablet">
+                                <li>
+                                    <div class="nav2-btn">
+                                        <div class="outer">
+								<span>
+                                    <a class="inner" href="/battles/new" alt="Menu Item 2"> Create New Battle </a>
+								</span>
+                                        </div>
+                                        <div class="arrow"><div class="arrowInner"></div></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="nav2-btn current">
+                                        <div class="outer">
+                                            <a class="inner" href="#" alt="Menu Item 3">Battles List</a>
+                                        </div>
+                                        <div class="arrow"><div class="arrowInner"></div></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear-both"></div>
+            </div>
+        </div>
+        <div class="head4"></div>
+        <div class="head5">
+            <div class="container">
+                <div class="breadcrumbs">
+                    <div class="icon"></div>
+                    <div class="clear-both"></div>
+                </div>
+            </div>
+        </div>
+    </div><!--end top nav -->
+</div>
 
-<br>
+<div class="root">
+    <div class="container">
+        <div class="row">
+            <div class="span2 sidebar bs-docs-sidebar">
+                <div class="bs-docs-sidenav">
+                    <ul class="nav nav-list">
+
+                        <%
+                           #create link for each of the Nav tiles
+                           i = 1
+                           @battles.each do |battle|
+                           link_id = "#part" + i.to_s
+                        %>
+                            <li>
+                                <a href="<%=link_id%>"><%=battle.name%></a>
+                            </li>
+                        <% i = i + 1 %>
+                        <% end %>
+
+                    </ul>
+
+                    <div class="clearfix"></div>
+                    <div class="to-top">
+                        <a name="To the top of the page" href="#part1">To the Top</a>
+                    </div>
+                </div>
+            </div>	<!-- end sidebar -->
+
+
+            <div class="content span10" style="*float:right;">
+
+                <%
+                   #Iterate through battles, create two strings for the section id header and the vs link
+                   #Then display the name of the battle, the hashtags, start & end date, and links for editing and deleting the battle.
+                   i = 1
+                   @battles.each do |battle|
+                     tag_names = []
+                     section_id = "part" + i.to_s
+                   battle.hashtags.each do |hashtag|
+                   tag_names.push(hashtag.content)
+                     end
+                %>
+                    <section id="<%=section_id%>">
+                        <h1><%= battle.name %></h1>
+
+                        <h5><%= link_to tag_names.join(" vs. "), battle %></h5>
+
+                        <p> Date Started: <%= battle.time_start %> </p>
+                        <% if battle.time_end.nil?%>
+                        <p> Finish Date:  <%= battle.time_end %> </p>
+                        <% end %>
+                        <span style="margin: 0, auto">
+                            <p style="">
+                                <%= link_to 'Edit this Battle', edit_battle_path(battle), :class => "btn btn-medium btn-warning" %>
+                            </p>
+                            <p>
+                               <%= link_to 'Destroy this Battle', battle, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-medium btn-warning" %>
+                            </p>
+                        </span>
+                        <hr />
+                    </section>
+                <% i = i + 1 %>
+                <% end %>
+
+            </div><!-- content div -->
+        </div>
+    </div><!-- end container div -->
+</div><!-- end root div -->
+
+
+<div id="footer">
+    <div class="foot2">
+        <div class="container">
+            <div class="row" style="margin-left: auto; margin-right: auto">
+                <div class="span2 foot-section">
+                    <ul class="foot-list">
+                        <li><a href="#">Item 1</a></li>
+                    </ul>
+                </div>
+                <div class="span2 foot-section">
+                    <ul class="foot-list">
+                        <li><a href="#">Item 1</a></li>
+                    </ul>
+                </div>
+                <div class="span2 foot-section">
+                    <ul class="foot-list">
+                        <li><a href="#">Item 1</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/modernizr/modernizr-1.7-development-only.js"></script>
+<script type="text/javascript">
+    Modernizr.load([{
+        test: Modernizr.input.placeholder,
+        nope : '/js/lib/polyfils/placeholder.js'
+    }]);
+</script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    var offset = 120;
+
+    $('.bs-docs-sidenav a').click(function(event) {
+        event.preventDefault();
+        $($(this).attr('href'))[0].scrollIntoView();
+        scrollBy(0, -offset);
+    });
+</script>
+
+<!-- affix script -->
+<script type="text/javascript">
+    setTimeout(function () {
+        $('.bs-docs-sidenav').affix({
+            offset: {
+                top: 0
+                , bottom: 540
+            }
+        })
+    }, 100)
+</script>
+</body>
