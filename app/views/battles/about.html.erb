@@ -1,0 +1,81 @@
+<p> On this page I have laid out some answers regarding analytics and the technical approach to this project</p>
+
+<p>Architecture breakdown:
+
+    Basically I went with a very simple approach. Tried to maintain a simple CRUD backend that didn't have too much
+    complexity to it. The twitter authentication is done with every action, which I would have liked to initialized, but
+    it wasn't working so I had to go to a per request basis.
+
+     On the front end, I tried to things from getting messy. As I am not really sure yet of best practice for front end
+    in Rails, I just defaulted to using the embedded ruby to iterate through my collections and take care of whatever logic
+    I needed on the pages.
+
+     I separated out as much of the styling as I could to keep it easier to maintain and reuse. The actual scrolling nav
+    on the front page I did not design myself, I found it somewhere else and decided to mess around with it.
+
+    Database design:
+
+</p>
+
+     Hashtag table
+        -id : integer
+     -count : integer
+   -content : text
+    has_many foreign keys (stored in HashtagBattles table)
+
+    HashtagBattles table
+    -hashtag_id            just to store the keys since the two tables have a has_many relationship
+    -battle_id
+
+    Battle table
+       -id : integer
+     -name : string
+-time_start : date
+ -time_end : date
+
+
+
+
+<p>Analytics this can provide:
+
+ It's always good to be in the loop, and something like this hashtag battle can do just that.
+ While the battle itself is an analytical tool that can read customer perception and sentiment, but it can expose
+    trends surrounding this hashtag. By mining the tweets of nearby vicinity in the twittosphere, you can judge what other
+    hashtags are being used and what trends and patterns they are associated with.
+
+    In addition to staying hot with trends, you can analyze your user base.
+
+    by searching the users attached to the hashtags, you can now see:
+    what age people are involed in the battle
+    what gender is involved in the battle
+    what time of day people tweet
+    how often something gets retweeted - popularity
+    where are the people that are involved in the battle
+    how often are the users tweeting about the products in this battle
+
+    --Grouping people by trend and other info, you get targeted marketing analytics.
+
+    If clients were using the battle and wanted to know if the battle is helpful you could also provide:
+
+    --how many tweets were surrounding this product before, during, and after the battle.
+
+    Could also indirectly analyze website traffic, this would most likely be done by the client but they could still
+    gather their own results.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
