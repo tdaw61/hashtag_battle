@@ -18,11 +18,8 @@ class BattlesController < ApplicationController
       last_tweet_id = 0
       search = hashtag.content + " -rt since:" + @battle.time_start.to_s + " until:" + (@battle.time_end + 1.day).to_s
       search_results = @client.search(search)
-      search_results.each do |tweet|
-        count = count + 1
-        last_tweet_id = tweet.id
-      end
-      hashtag.count = count
+      count = search_results.count
+      last_tweet_id = search_results.attrs[:search_metadata][:max_id]
 
       #update the hashtag to have the actual count, since twitter search api only keeps valid data for a week.
       #Also keep track of last tweet ID counted, so you can start count from there next time.
@@ -30,7 +27,9 @@ class BattlesController < ApplicationController
       unless count == @db_hashtag.count
         @db_hashtag.count = count
         @db_hashtag.last_tweet_id = last_tweet_id
+        @db_hashtag.save
       end
+      hashtag.count = count
     end
   end
 

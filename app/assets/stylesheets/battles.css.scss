@@ -55,7 +55,7 @@ a.iconic-btn .divider { display: -moz-inline-stack; display: inline-block; verti
 
 
 
-hr { background: url('../images/default/bg/hr.png?1360067861') 0 0 no-repeat; height: 52px; width: 733px; border: none;*border: 0 !Important;*border-right:0;*display:list-item;*list-style: url('../images/default/bg/hr.png?1360067861') inside;filter : alpha(opacity=0);*margin-left: -10px;*width : 0;/* added ie7 rules - important for ie 7 */ padding-bottom: 20px; }
+hr { height: 52px; width: 733px; border: none;*border: 0 !Important;*border-right:0;*display:list-item; filter : alpha(opacity=0);*margin-left: -10px;*width : 0;/* added ie7 rules - important for ie 7 */ padding-bottom: 20px; }
 hr.compact { width: 100%; height: 1px; border: none; background-color: #ededed; padding-bottom: 0; background-image: none; }
 
 body h1, body section h2 { font-family: "DIN Bold", sans-serif; padding-left: 0; padding-bottom: 25px; font-size: 46px; color: #000; }/* add 'body' to over ride bootstrap inherit */
@@ -70,7 +70,7 @@ p { font-size: 14px; padding: 20px 0; }
 
 p + p { padding-top: 10px; }
 
-.navbar-fixed { position: fixed; top:0; width: 100%; left: 0; top: 0; z-index: 100; }
+.navbar-fixed { position: fixed; top:31px; width: 100%; left: 0; top: 31; z-index: 100; }
 
 /* fixToolbar add class hass been removed for this mock */
 
